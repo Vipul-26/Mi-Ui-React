@@ -1,13 +1,17 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
+
+// @mui/styles no longer being used in React-18
+// npm install --save react@17.0.2 + npm install --save react-dom@17.0.2 + npm i @mui/styles
+// import { makeStyles } from "@mui/styles";
+
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
 
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
@@ -17,22 +21,22 @@ const columns = [
     label: "Population",
     minWidth: 170,
     align: "right",
-    format: (value) => value.toLocaleString()
+    format: (value) => value.toLocaleString(),
   },
   {
     id: "size",
     label: "Size\u00a0(km\u00b2)",
     minWidth: 170,
     align: "right",
-    format: (value) => value.toLocaleString()
+    format: (value) => value.toLocaleString(),
   },
   {
     id: "density",
     label: "Density",
     minWidth: 170,
     align: "right",
-    format: (value) => value.toFixed(2)
-  }
+    format: (value) => value.toFixed(2),
+  },
 ];
 
 const createData = (name, code, population, size) => {
@@ -70,21 +74,21 @@ const rows = [
   createData("United Kingdom", "GB", 67545757, 242495),
   createData("Russia", "RU", 146793744, 17098246),
   createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767)
+  createData("Brazil", "BR", 210147125, 8515767),
 ];
 
-const useStyles = makeStyles({
-  root: {
-    width: "80%",
-    margin: "1rem auto"
-  },
-  container: {
-    maxHeight: 440
-  }
-});
+// const useStyles = makeStyles({
+//   root: {
+//     width: "80%",
+//     margin: "1rem auto",
+//   },
+//   container: {
+//     maxHeight: 440,
+//   },
+// });
 
 const App = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -98,8 +102,10 @@ const App = () => {
   };
 
   return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
+    // <Paper className={classes.root}>
+    <Paper sx={{ width: "80%", margin: "1rem auto" }}>
+      {/* <TableContainer className={classes.container}> */}
+      <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -142,8 +148,8 @@ const App = () => {
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
   );
